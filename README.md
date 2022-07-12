@@ -1,4 +1,4 @@
 # EggWar
-Testing some cloning Mobils object nehaviours
+Testing some cloning Mobils object behaviours
 
 Fail so far !!!
