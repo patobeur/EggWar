@@ -8,10 +8,10 @@
 		<title>EggWars</title>
 		<script src="./main.js"></script>
 		<script src="./js/Config.js"></script>
+		<script src="./js/Game.js"></script>
 		<script src="./js/Dom.js"></script>
 		<script src="./js/Mobs.js"></script>
 		<script src="./js/MobsIa.js"></script>
-		<script src="./js/Challenge.js"></script>
 		<script src="./js/Animate.js"></script>
 		<script src="./js/Formula.js"></script>
 		<style>
@@ -31,11 +31,18 @@
 			#Game {
 				position: absolute;
 				display: flex;
-				width: 100%;
-				height: 100vh;
+				left: 5%;
+				top: 5vh;
+				width: 90%;
+				height: 90vh;
 				margin: 0;
 				padding: 0;
 				overflow: hidden;
+				border: 1px solid white
+			}
+
+			.ico {
+				box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2)
 			}
 
 		</style>

@@ -22,12 +22,11 @@ class MobsIa {
 
 			switch (actionConf.currentAction) {
 				case 0:
+					this.#chooseDir(mob)
 					break;
 				case 1:
 				case 2:
 				case 3:
-					this.#chooseDir(mob)
-					break;
 				default:
 					break;
 			}
@@ -84,6 +83,7 @@ class MobsIa {
 		mob.mobdiv.style.msTransform = 'rotate(' + mob.conf.theta.cur + 'deg)';
 		mob.mobdiv.style.oTransform = 'rotate(' + mob.conf.theta.cur + 'deg)';
 		mob.mobdiv.style.transform = 'rotate(' + mob.conf.theta.cur + 'deg)';
+		mob.ico.style.transform = 'rotate(' + -mob.conf.theta.cur + 'deg)';
 
 		// mob.mobdiv.style.rotate = (mob.conf.theta.cur) + 'deg'
 		// console.log('--', mob.mobdiv.style.rotate)

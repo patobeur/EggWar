@@ -1,3 +1,3 @@
 window.onload = function init() {
-	let game = new Challenge()
+	let game = new Game()
 }

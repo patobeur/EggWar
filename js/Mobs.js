@@ -17,14 +17,13 @@ class Mobs {
 		// set a fresh conf
 
 		let conf = this.#Config.get_('mobs')
-
 		// set start position 
 		conf.position = this.#Formula.get_aleaPosOnScreen(conf.divs.mobdiv.size)
 
 		conf.name = (!name === false) ? name : 'Clone_' + this.#Formula.get_aleaEntreBornes(1, 99999);
 		conf.id = 'Mob_' + this.#CurrentMobImmat
 
-		let newMob = { conf: conf }
+		let newMob = { conf: { ...conf } }
 
 		// INSERT IA
 		newMob.mobIa = new MobsIa(this.#Formula)
@@ -74,6 +73,12 @@ class Mobs {
 	// -------------------------------------------------------------
 
 	get_allMobs() {
-		return this.#Mobs
+		if (this.#Mobs.length < 1) {
+			console.log('no mobs found')
+			return false;
+		}
+		else {
+			return this.#Mobs;
+		}
 	}
 }
