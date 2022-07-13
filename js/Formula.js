@@ -1,7 +1,7 @@
 class Formula {
 	constructor() {
 	}
-	getNextPos = (x, y, tetha, speed) => {
+	get_NextPos = (x, y, tetha, speed) => {
 
 		tetha = this.degToRad(tetha)
 
@@ -20,12 +20,13 @@ class Formula {
 	get_aleaPosOnScreen(size) {
 		let maxX = window.innerWidth;
 		let maxY = window.innerHeight;
-		console.log(maxX, maxY)
+		// console.log(maxX, maxY)
 		let pos = {
 			x: this.get_aleaEntreBornes(0, maxX - (size.x / 2)),
 			y: this.get_aleaEntreBornes(0, maxY - (size.y / 2)),
 			z: this.get_aleaEntreBornes(-1, 1)
 		}
+		// console.log(size, pos)
 		return pos
 	}
 	degToRad(deg) {
@@ -37,14 +38,14 @@ class Formula {
 		return rad * (180 / pi);
 	}
 
-	// getNextOrbit(x, y, tetha) {
+	// get_NextOrbit2D(x, y, tetha) {
 	// 	tetha = this.degToRad(tetha)
 	// 	return {
 	// 		x: (x * Math.cos(tetha)) - (y * Math.sin(tetha)),
 	// 		y: (x * Math.sin(tetha)) + (y * Math.cos(tetha))
 	// 	}
 	// }
-	// getDistance = (from, destination) => {
+	// get_Distance2D = (from, destination) => {
 	// 	let AB = (destination.x) - (from.x)
 	// 	let AC = (destination.y) - (from.y)
 	// 	let distance = Math.sqrt((AB * AB) + (AC * AC))

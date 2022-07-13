@@ -1,9 +1,18 @@
 class Config {
 	#Config
 	constructor() {
-		this.#Config = {
+		this.#Config = this.#get_config()
+	}
+	get_(parent, value = false) {
+		let confParent = this.#Config[parent] ?? false;
+		let confValue = confParent[value] ? confParent[value] : confParent ? confParent : false;
+		return { ...confValue }
+	}
+	#get_config() {
+		return {
 			dom: {
-				gameDivId: 'Game'
+				gameDivId: 'Game',
+				className: 'radientbg'
 			},
 			mobs: {
 				lv: 0,
@@ -54,10 +63,5 @@ class Config {
 				interval: 50
 			}
 		}
-	}
-	get_(parent, value = false) {
-		let confParent = this.#Config[parent] ?? false;
-		let confValue = confParent[value] ? confParent[value] : confParent ? confParent : false;
-		return { ...confValue }
 	}
 }

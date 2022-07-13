@@ -1,7 +1,8 @@
 class Dom {
 	#Config
 
-	#Body; #GameDiv
+	#Body;
+	#GameDiv
 
 	constructor(Config) {
 		this.#Config = Config
@@ -16,6 +17,7 @@ class Dom {
 	#init_GameDiv() {
 		this.#GameDiv = document.createElement('div')
 		this.#GameDiv.id = this.#Config.get_('dom').gameDivId
+		this.#GameDiv.className = this.#Config.get_('dom').className
 		this.#add_ToTargetDomElem(this.#GameDiv, this.#Body)
 	}
 
@@ -29,23 +31,22 @@ class Dom {
 	}
 
 	#add_OneMobToDom(mob) {
-		let mobConfDivs = mob.conf.divs
-		for (var key in mobConfDivs) {
-			if (mobConfDivs.hasOwnProperty(key)) {
+		let conf = mob.conf
+		for (var key in conf.divs) {
+			if (conf.divs.hasOwnProperty(key)) {
 
-				let targetConf = mobConfDivs[key];
+				let targetConf = conf.divs[key];
 
-				if (!targetConf.parent) mob[targetConf.className].id = mob.conf.id
+				if (!targetConf.parent) mob[targetConf.className].id = conf.id
 				if (targetConf.parent) mob[targetConf.parent].appendChild(mob[targetConf.className])
 
 
 				mob[targetConf.className].className = targetConf.className
-				mob[targetConf.className].setAttribute('data-name', mob.conf.name)
+				if (!targetConf.parent) mob[targetConf.className].setAttribute('data-name', conf.name)
 
 			}
 		}
 	}
-
 	#add_ToTargetDomElem(element, target = false) {
 		if (target) target.appendChild(element);
 		else console.warn('appenchild impossible')
