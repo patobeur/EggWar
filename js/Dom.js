@@ -31,7 +31,7 @@ class Dom {
 	}
 
 	#add_OneMobToDom(mob) {
-		let conf = mob.conf
+		let conf = mob.get_conf()
 		for (var key in conf.divs) {
 			if (conf.divs.hasOwnProperty(key)) {
 

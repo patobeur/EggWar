@@ -2,59 +2,25 @@ class Mobs {
 	#AllMobs;
 	#CurrentMobImmat;
 	#Config;
-	#Formula;
 
 	constructor(Config) {
 		this.#Config = Config
-		this.#Formula = new Formula()
 		this.#AllMobs = []
 		this.#CurrentMobImmat = 0
 		this.#cssMaker()
 	}
 
 	addOne(name = false) {
+		let newmob = new Mob(
+			name,
+			this.#Config,
+			this.#CurrentMobImmat
+		)
 
-		// set a fresh conf
-
-		let conf = this.#Config.get_('mobs')
-		// set start position 
-		conf.position = this.#Formula.get_aleaPosOnScreen(conf.divs.mobdiv.size)
-
-		conf.name = (!name === false) ? name : 'Clone_' + this.#Formula.get_aleaEntreBornes(1, 99999);
-		conf.id = 'Mob_' + this.#CurrentMobImmat
-
-		let newMob = { conf: { ...conf } }
-
-		// ADD IA
-		newMob.mobIa = new MobsIa(this.#Formula, newMob)
-
-		this.#set_MobDivs(newMob)
-
-		newMob.update = (newMob) => {
-			newMob.mobIa.iaAction()
-		};
-
-		console.log('created new Mob', newMob)
-
-		this.#AllMobs.push(newMob)
-		this.#CurrentMobImmat = this.#AllMobs.length
-
+		this.#AllMobs.push(newmob)
 	}
-
-	// update() {
-	// 	for (let index = 0; index < this.#AllMobs.length; index++) {
-	// 		this.#AllMobs[index].mobIa.iaAction(this.#AllMobs[index])
-	// 	}
-	// }
 
 	// -------------------------------------------------------------
-
-	#set_MobDivs(newMob) {
-		newMob.mobdiv = document.createElement('div')
-		newMob.range = document.createElement('div')
-		newMob.dir = document.createElement('div')
-		newMob.ico = document.createElement('div')
-	}
 
 	#cssMaker = () => {
 		let stringcss = this.get_localCss()

@@ -4,23 +4,21 @@ class Animate {
 	#AllMobs
 	#interval
 	#Render
-	constructor(Config, Mobs, AllMobs) {
+	constructor(Config, AllMobs) {
 		this.#Config = Config
-		// this.#Mobs = Mobs
 		this.#AllMobs = AllMobs
 		this.#init_()
 	}
 	#init_ = () => {
-		console.log(Mobs)
-		console.log(this.#AllMobs)
+		console.log('mobs:', this.#AllMobs)
 		this.#interval = this.#Config.get_('Animate').interval
 	}
 	#animate = () => {
-		// this.#Mobs.update()
-		this.#AllMobs.forEach(mob => {
-			mob.update(mob)
-		});
-
+		if (this.#AllMobs.length > 0) {
+			this.#AllMobs.forEach(mob => {
+				mob.update()
+			});
+		}
 	}
 	start_Animate() {
 		this.#Render = setInterval(this.#animate, this.#interval)

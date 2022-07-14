@@ -29,7 +29,7 @@ class Game {
 		this.#Dom.add_AllMobsToDom(this.#allMobs)
 
 		// le bug est là ???? #allMobs plutot que #Mobs ???
-		this.Animate = new Animate(this.#Config, this.#Mobs, this.#allMobs)
+		this.Animate = new Animate(this.#Config, this.#allMobs)
 		this.start()
 
 
