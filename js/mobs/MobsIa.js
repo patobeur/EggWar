@@ -47,10 +47,10 @@ class MobsIa {
 		if (this.#conf.ia.changeAction.cur > this.#conf.ia.changeAction.max) {
 			this.#conf.ia.changeAction.cur = 0
 		}
-		let theta = this.#Formula.get_aleaEntreBornes(
-			this.#conf.theta.min,
-			this.#conf.theta.max
-		)
+		// let theta = this.#Formula.get_aleaEntreBornes(
+		// 	this.#conf.theta.min,
+		// 	this.#conf.theta.max
+		// )
 	}
 	#chooseDir() {
 
@@ -58,11 +58,24 @@ class MobsIa {
 
 		this.#conf.theta.cur += Math.floor(dir * this.#conf.ia.dirAmplitude)
 
+
 		// keep degree between 0 and 360
 		// care with css rotate transitions delay
-		// if (this.#conf.theta.cur > this.#conf.theta.max) this.#conf.theta.cur = this.#conf.theta.cur - 360;
-		// if (this.#conf.theta.cur < 0)this.#conf.theta.cur = 360 + this.#conf.theta.cur;
+		// if (this.#conf.theta.cur > 360) this.#conf.theta.cur -= 360;
+		// if (this.#conf.theta.cur < 0) this.#conf.theta.cur += 360;
 		// console.log(dir, this.#conf.theta.cur)
+
+
+		this.#Mob.mobdiv.style.webkitTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
+		this.#Mob.mobdiv.style.mozTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
+		this.#Mob.mobdiv.style.msTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
+		this.#Mob.mobdiv.style.oTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
+		this.#Mob.mobdiv.style.transform = 'rotate(' + this.#conf.theta.cur + 'deg)';
+
+		// rotate counter
+		this.#Mob.ico.style.transform = 'rotate(' + (-this.#conf.theta.cur) + 'deg)';
+
+		this.#Mob.ico.textContent = this.#conf.theta.cur + '°';
 	}
 	#keepMoving() {
 
@@ -79,16 +92,6 @@ class MobsIa {
 		this.#Mob.mobdiv.style.top = (nextpos.y - (this.#conf.position.y / 2)) + 'px'
 		this.#Mob.mobdiv.style.left = (nextpos.x - (this.#conf.position.x / 2)) + 'px'
 
-		this.#Mob.mobdiv.style.webkitTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
-		this.#Mob.mobdiv.style.mozTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
-		this.#Mob.mobdiv.style.msTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
-		this.#Mob.mobdiv.style.oTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
-		this.#Mob.mobdiv.style.transform = 'rotate(' + this.#conf.theta.cur + 'deg)';
-
-		// rotate counter
-		this.#Mob.ico.style.transform = 'rotate(' + (-this.#conf.theta.cur) + 'deg)';
-
-		this.#Mob.ico.textContent = this.#conf.theta.cur + '°';
 	}
 	#changeDir() {
 		this.#conf.theta.cur = this.#Formula.get_aleaEntreBornes(
