@@ -33,15 +33,13 @@ class MobsIa {
 					this.#chooseDir()
 					break;
 				default:
+					this.#chooseDir()
 					break;
 			}
 		}
 		else {
 			this.#keepMoving()
 		}
-
-
-
 
 		// one more tic
 		this.#conf.ia.changeAction.cur++
