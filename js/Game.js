@@ -3,7 +3,8 @@ class Game {
 	#Config
 
 	// mobs
-	#Mobs; #allMobs
+	#Mobs;
+	#allMobs
 
 	// dom html
 	#Dom
@@ -19,17 +20,17 @@ class Game {
 		// ----------- mobs
 		this.#Mobs.addOne('Alice')
 		this.#Mobs.addOne('Bob')
-
 		this.#allMobs = this.#Mobs.get_allMobs()
 
 		// warn check if empty Mobs (to erase)
 		if (this.#allMobs.length <= 0) console.warn('no mobs found')
-		console.warn('init', this.#allMobs)
 
+		console.warn('this IS wrong(not same mob but same mobdiv', this.#allMobs)
 		this.#Dom.add_AllMobsToDom(this.#allMobs)
 
 		// le bug est là ???? #allMobs plutot que #Mobs ???
 		this.Animate = new Animate(this.#Config, this.#allMobs)
+
 		this.start()
 
 

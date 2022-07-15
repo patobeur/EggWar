@@ -6,7 +6,6 @@ class Mob {
 	// --
 	#name
 	#Conf
-	#Mob;
 	constructor(name, Config, CurrentMobImmat) {
 		this.#name = name
 		this.#Config = Config
@@ -15,10 +14,7 @@ class Mob {
 		this.#Formula = new Formula()
 		this.#init()
 	}
-	
-	get_mob() {
-		return this.#Mob
-	}
+
 	get_name() {
 		return this.#name
 	}
@@ -39,6 +35,7 @@ class Mob {
 
 		// ADD IA
 		this.#set_MobDivs()
+
 		this.#MobsIa = new MobsIa(this)
 
 		console.log('return this', this)
