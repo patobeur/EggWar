@@ -35,33 +35,39 @@ class Config {
 				},
 				divs: {
 					mobdiv: {
+						divName: 'mobdiv',
 						className: 'mobdiv',
 						size: { x: 2, y: 2, z: 2 },
-						backgroundColor: 'yellow'
+						backgroundColor: 'yellow',
+						parentDivName: false
 					},
 					range: {
+						divName: 'range',
 						className: 'range',
 						size: { x: 80, y: 80, z: 80 },
 						backgroundColor: 'rgba(255, 255, 255, .95)',
-						parent: 'mobdiv'
+						parentDivName: 'mobdiv'
 					},
 					dir: {
+						divName: 'dir',
 						className: 'dir',
 						size: { x: 10, y: 8, z: 4 },
 						backgroundColor: 'rgba(0, 0, 0, 0.8)',
-						parent: 'range'
+						parentDivName: 'range'
 					},
 					ico: {
+						divName: 'ico',
 						className: 'ico',
 						size: { x: 30, y: 30, z: 30 },
 						backgroundColor: 'rgba(255,220,150,1)',
-						parent: 'mobdiv'
+						parentDivName: 'mobdiv'
 					},
 					info: {
+						divName: 'info',
 						className: 'info',
 						size: { x: 40, y: 20, z: 40 },
 						backgroundColor: 'rgba(150,150,255,.8)',
-						parent: 'mobdiv'
+						parentDivName: 'mobdiv'
 					}
 				},
 			},

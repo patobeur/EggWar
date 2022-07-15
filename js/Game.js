@@ -1,7 +1,7 @@
 
 class Game {
 	#Config
-
+	#Animate
 	// mobs
 	#Mobs;
 	#allMobs
@@ -14,13 +14,13 @@ class Game {
 		this.#Mobs = new Mobs(this.#Config)
 		// --
 		this.#init_()
-		this.#add_event()
+		// this.#add_event()
 	}
 	#init_() {
-		// ----------- mobs
+
 		// let liste = ['Antho', 'Benoist', 'Renaud', 'Eslam', 'Charles-L', 'Guillaume', 'Pyl', 'Rémi', 'Audrey', 'Cédric', 'Feun']
-		let liste = ['Alice', 'Bob']
-		liste.forEach(element => {
+
+		['Alice', 'Bob'].forEach(element => {
 
 			this.#Mobs.addOne(element)
 
@@ -28,13 +28,9 @@ class Game {
 
 		this.#allMobs = this.#Mobs.get_allMobs()
 
-		// warn check if empty Mobs (to erase)
-		if (this.#allMobs.length <= 0) console.warn('no mobs found')
-
-		console.warn('this IS wrong(not same mob but same mobdiv', this.#allMobs)
 		this.#Dom.add_AllMobsToDom(this.#allMobs)
 
-		this.Animate = new Animate(this.#Config, this.#allMobs)
+		this.#Animate = new Animate(this.#Config, this.#allMobs)
 
 		this.start()
 
@@ -42,10 +38,10 @@ class Game {
 	}
 	#add_event() {
 		window.onresize = () => {
-			// console.log('ff', window.innerWidth, window.innerHeight)
+			// console.log(window.innerWidth, window.innerHeight)
 		}
 	}
 	start() {
-		this.Animate.start_Animate()
+		this.#Animate.start_Animate()
 	}
 }

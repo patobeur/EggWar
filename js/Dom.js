@@ -26,32 +26,35 @@ class Dom {
 		if (typeof Mobs === 'object') {
 			Mobs.forEach(mob => {
 				this.#add_OneMobToDom(mob)
-				this.#add_ToTargetDomElem(mob.mobdiv, this.#GameDiv)
+				this.#add_ToTargetDomElem(mob.get_div('mobdiv'), this.#GameDiv)
 			});
 		}
 	}
 
 	#add_OneMobToDom(mob) {
-		let conf = mob.get_conf()
-		for (var key in conf.divs) {
-			if (conf.divs.hasOwnProperty(key)) {
+		let mobConf = mob.get_conf()
 
-				let targetConf = conf.divs[key];
+		// get all div in this mobConf
+		for (var key in mobConf.divs) {
+			if (mobConf.divs.hasOwnProperty(key)) {
 
-				if (!targetConf.parent) mob[targetConf.className].id = conf.id
-				if (targetConf.parent) mob[targetConf.parent].appendChild(mob[targetConf.className])
+				let parentdiv = mobConf.divs[key].parentDivName
+					? mob.get_div(mobConf.divs[key].parentDivName)
+					: false
 
+				if (parentdiv) parentdiv.appendChild(mob.get_div(key))
+				if (!parentdiv) mob.set_div(key, mobConf.id, 'id', false)
+				if (!parentdiv) mob.set_div(key, mobConf.name, 'data-name', false)
 
-				mob[targetConf.className].className = targetConf.className
-				if (!targetConf.parent) mob[targetConf.className].setAttribute('data-name', conf.name)
-				if (key === 'info') mob[targetConf.className].textContent = conf.name
-				//mob[targetConf.className].setAttribute('data-name', conf.name)
+				if (key === 'info') mob.set_div(key, mobConf.name, 'textContent', false)
+
+				mob.set_div(key, mobConf.divs[key].className, 'className', false)
 
 			}
 		}
 	}
 	#add_ToTargetDomElem(element, target = false) {
-		if (target) { target.appendChild(element); }
+		if (target && element) { target.appendChild(element); }
 		else { console.warn('appenchild impossible') }
 	}
 

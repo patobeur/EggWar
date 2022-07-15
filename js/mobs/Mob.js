@@ -1,41 +1,24 @@
 class Mob {
-	#CurrentMobImmat;
-	#Config;
-	#Formula;
-	#MobsIa
+	#CurrentMobImmat = new Number(0);
+	#Conf = {}
+	#Formula = {}
+	#MobsIa = {}
 	// --
-	#name
-	#Conf
-	constructor(name, Config, CurrentMobImmat) {
+	#name = new String('UnNamed')
+	#divs = {}
+	constructor(name = false, newConf, CurrentMobImmat) {
 		this.#name = name
-		this.#Config = Config
+		this.#Conf = newConf
 		this.#CurrentMobImmat = CurrentMobImmat
 
 		this.#Formula = new Formula()
 		this.#init()
 	}
-
-	get_name() {
-		return this.#name
-	}
-	get_conf() {
-		return this.#Conf
-	}
 	#init() {
 
-		// set a fresh conf
-		this.#Conf = this.#Config.get_('mobs')
-
-		// set start position 
-		this.#Conf.position = this.#Formula.get_aleaPosOnScreen(this.#Conf.divs.mobdiv.size)
-
-		this.#Conf.name = (!this.#name === false) ? this.#name : 'Clone_' + this.#Formula.get_aleaEntreBornes(1, 99999);
-		this.#Conf.id = 'Mob_' + this.#CurrentMobImmat
-		// this.#Conf.info = navigator
-		console.log('+++', this.#Conf)
 		this.#set_MobDivs()
 
-		// ADD IA
+		// // ADD IA
 		this.#MobsIa = new MobsIa(this)
 
 		return this
@@ -44,9 +27,29 @@ class Mob {
 		this.#MobsIa.iaAction()
 	};
 	// -------------------------------------------------------------
+	get_name() {
+		return this.#name
+	}
+	get_conf() {
+		return this.#Conf
+	}
+	set_div(target, value = false, attribute = false, attribute2 = false) {
+		if (this.#divs[target] && value) {
+			if (attribute && attribute2) {
+				this.#divs[target][attribute][attribute2] = value
+			}
+			else if (attribute && !attribute2) {
+				this.#divs[target][attribute] = value
+			}
+		}
+	}
+	get_div(nameDiv) {
+		if (this.#divs[nameDiv]) return this.#divs[nameDiv]
+	}
+	// -------------------------------------------------------------
 	#set_MobDivs() {
 		for (var div in this.#Conf.divs) {
-			this[div] = document.createElement('div')
+			this.#divs[div] = document.createElement('div')
 		};
 	}
 }

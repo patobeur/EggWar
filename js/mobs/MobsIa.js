@@ -28,11 +28,10 @@ class MobsIa {
 				case 0:
 				case 1:
 				case 2:
+				case 3:
+				case 4:
 					this.#chooseDir()
 					break;
-				case 3:
-					this.#changeDir()
-				case 4:
 				default:
 					break;
 			}
@@ -81,8 +80,10 @@ class MobsIa {
 		this.#conf.position.y = nextpos.y
 		this.#conf.position.x = nextpos.x
 
-		this.#Mob.mobdiv.style.top = (nextpos.y - (this.#conf.divs.mobdiv.size.y / 2)) + 'px'
-		this.#Mob.mobdiv.style.left = (nextpos.x - (this.#conf.divs.mobdiv.size.x / 2)) + 'px'
+		this.#Mob.set_div('mobdiv', (nextpos.y - (this.#conf.divs.mobdiv.size.y / 2)) + 'px', 'style', 'top')
+		this.#Mob.set_div('mobdiv', (nextpos.x - (this.#conf.divs.mobdiv.size.x / 2)) + 'px', 'style', 'left')
+		// this.#Mob.divs.mobdiv.style.top = (nextpos.y - (this.#conf.divs.mobdiv.size.y / 2)) + 'px'
+		// this.#Mob.divs.mobdiv.style.left = (nextpos.x - (this.#conf.divs.mobdiv.size.x / 2)) + 'px'
 
 	}
 	#changeDir() {
@@ -93,16 +94,16 @@ class MobsIa {
 	}
 	// --------------
 	#refresh_Div() {
-		this.#Mob.range.style.webkitTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
-		this.#Mob.range.style.mozTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
-		this.#Mob.range.style.msTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
-		this.#Mob.range.style.oTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
-		this.#Mob.range.style.transform = 'rotate(' + this.#conf.theta.cur + 'deg)';
-
+		// this.#Mob.set_div('range', 'style', 'webkitTransform', 'rotate(' + this.#conf.theta.cur + 'deg)')
+		// this.#Mob.set_div('range', 'style', 'mozTransform', 'rotate(' + this.#conf.theta.cur + 'deg)')
+		// this.#Mob.set_div('range', 'style', 'msTransform', 'rotate(' + this.#conf.theta.cur + 'deg)')
+		// this.#Mob.set_div('range', 'style', 'oTransform', 'rotate(' + this.#conf.theta.cur + 'deg)')
+		this.#Mob.set_div('range', 'rotate(' + this.#conf.theta.cur + 'deg)', 'style', 'transform')
 		// rotate counter
 		// this.#Mob.ico.style.transform = 'rotate(' + (-this.#conf.theta.cur) + 'deg)';
+		this.#Mob.set_div('ico', this.#conf.theta.cur + '°', 'textContent', false)
 
-		this.#Mob.ico.textContent = this.#conf.theta.cur + '°';
+		// this.#Mob.divs.ico.textContent = this.#conf.theta.cur + '°';
 
 	}
 }
