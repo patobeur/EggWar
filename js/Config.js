@@ -60,7 +60,7 @@ class Config {
 					info: {
 						className: 'info',
 						size: { x: 40, y: 20, z: 40 },
-						backgroundColor: 'rgba(255,255,255,.5)',
+						backgroundColor: 'rgba(150,150,255,.8)',
 						parent: 'mobdiv'
 					}
 				},
