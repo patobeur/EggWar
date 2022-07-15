@@ -18,8 +18,13 @@ class Game {
 	}
 	#init_() {
 		// ----------- mobs
-		this.#Mobs.addOne('Alice')
-		this.#Mobs.addOne('Bob')
+		let liste = ['Alice', 'Bob', 'Guillaume', 'Pyl', 'Rémi', 'Audrey', 'Cédric', 'Feun']
+		liste.forEach(element => {
+
+			this.#Mobs.addOne(element)
+
+		});
+
 		this.#allMobs = this.#Mobs.get_allMobs()
 
 		// warn check if empty Mobs (to erase)
@@ -28,7 +33,6 @@ class Game {
 		console.warn('this IS wrong(not same mob but same mobdiv', this.#allMobs)
 		this.#Dom.add_AllMobsToDom(this.#allMobs)
 
-		// le bug est là ???? #allMobs plutot que #Mobs ???
 		this.Animate = new Animate(this.#Config, this.#allMobs)
 
 		this.start()

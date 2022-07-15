@@ -25,20 +25,18 @@ class Mob {
 
 		// set a fresh conf
 		this.#Conf = this.#Config.get_('mobs')
-		this.#Conf = { ...this.#Conf }
+
 		// set start position 
 		this.#Conf.position = this.#Formula.get_aleaPosOnScreen(this.#Conf.divs.mobdiv.size)
+
 		this.#Conf.name = (!this.#name === false) ? this.#name : 'Clone_' + this.#Formula.get_aleaEntreBornes(1, 99999);
 		this.#Conf.id = 'Mob_' + this.#CurrentMobImmat
-
-		// this.#Mob = { conf: { ...this.#Conf } }
-
-		// ADD IA
+		// this.#Conf.info = navigator
+		console.log('+++', this.#Conf)
 		this.#set_MobDivs()
 
+		// ADD IA
 		this.#MobsIa = new MobsIa(this)
-
-		console.log('return this', this)
 
 		return this
 	}
@@ -47,9 +45,8 @@ class Mob {
 	};
 	// -------------------------------------------------------------
 	#set_MobDivs() {
-		this.mobdiv = document.createElement('div')
-		this.range = document.createElement('div')
-		this.dir = document.createElement('div')
-		this.ico = document.createElement('div')
+		for (var div in this.#Conf.divs) {
+			this[div] = document.createElement('div')
+		};
 	}
 }

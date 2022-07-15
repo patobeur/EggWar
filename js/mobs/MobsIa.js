@@ -40,6 +40,10 @@ class MobsIa {
 		else {
 			this.#keepMoving()
 		}
+
+
+
+
 		// one more tic
 		this.#conf.ia.changeAction.cur++
 
@@ -55,27 +59,14 @@ class MobsIa {
 	#chooseDir() {
 
 		let dir = this.#Formula.get_aleaEntreBornes(0, 1) > 0 ? -1 : 1;
-
 		this.#conf.theta.cur += Math.floor(dir * this.#conf.ia.dirAmplitude)
-
-
 		// keep degree between 0 and 360
 		// care with css rotate transitions delay
 		// if (this.#conf.theta.cur > 360) this.#conf.theta.cur -= 360;
 		// if (this.#conf.theta.cur < 0) this.#conf.theta.cur += 360;
 		// console.log(dir, this.#conf.theta.cur)
+		this.#refresh_Div()
 
-
-		this.#Mob.mobdiv.style.webkitTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
-		this.#Mob.mobdiv.style.mozTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
-		this.#Mob.mobdiv.style.msTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
-		this.#Mob.mobdiv.style.oTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
-		this.#Mob.mobdiv.style.transform = 'rotate(' + this.#conf.theta.cur + 'deg)';
-
-		// rotate counter
-		this.#Mob.ico.style.transform = 'rotate(' + (-this.#conf.theta.cur) + 'deg)';
-
-		this.#Mob.ico.textContent = this.#conf.theta.cur + '°';
 	}
 	#keepMoving() {
 
@@ -98,5 +89,19 @@ class MobsIa {
 			this.#conf.theta.min,
 			this.#conf.theta.max
 		)
+	}
+	// --------------
+	#refresh_Div() {
+		this.#Mob.range.style.webkitTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
+		this.#Mob.range.style.mozTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
+		this.#Mob.range.style.msTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
+		this.#Mob.range.style.oTransform = 'rotate(' + this.#conf.theta.cur + 'deg)';
+		this.#Mob.range.style.transform = 'rotate(' + this.#conf.theta.cur + 'deg)';
+
+		// rotate counter
+		// this.#Mob.ico.style.transform = 'rotate(' + (-this.#conf.theta.cur) + 'deg)';
+
+		this.#Mob.ico.textContent = this.#conf.theta.cur + '°';
+
 	}
 }

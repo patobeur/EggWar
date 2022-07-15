@@ -44,6 +44,8 @@ class Dom {
 
 				mob[targetConf.className].className = targetConf.className
 				if (!targetConf.parent) mob[targetConf.className].setAttribute('data-name', conf.name)
+				if (key === 'info') mob[targetConf.className].textContent = conf.name
+				//mob[targetConf.className].setAttribute('data-name', conf.name)
 
 			}
 		}
@@ -68,11 +70,11 @@ class Dom {
 	#get_localCss() {
 		let conf = this.#Config.get_('mobs')
 		// console.log(conf)
-		let stringcss = '.mobdiv {position: relative;border-radius: 50%;display: flex;justify-content: center;align-items: center;width: ' + conf.divs.range.size.x + 'px;height: ' + conf.divs.range.size.y + 'px;transition: transform 1s ease;}'
-		stringcss += '.range {position: absolute;display: flex;justify-content: center;align-items: flex-end;border-radius: 50%;background-color: ' + conf.divs.range.backgroundColor + ';width: ' + conf.divs.range.size.x + 'px;height: ' + conf.divs.range.size.y + 'px;}'
+		let stringcss = '.mobdiv {position: relative;border-radius: 50%;display: flex;justify-content: center;align-items: center;width: ' + conf.divs.range.size.x + 'px;height: ' + conf.divs.range.size.y + 'px;}'
+		stringcss += '.range {position: absolute;display: flex;justify-content: center;align-items: flex-end;border-radius: 50%;background-color: ' + conf.divs.range.backgroundColor + ';width: ' + conf.divs.range.size.x + 'px;height: ' + conf.divs.range.size.y + 'px;transition: transform 1s ease;}'
 		stringcss += '.dir {position: absolute;border-radius: 50%;background-color: ' + conf.divs.dir.backgroundColor + ';width: ' + conf.divs.dir.size.x + 'px;height: ' + conf.divs.dir.size.y + 'px;}'
 		stringcss += '.ico {position: absolute;border-radius: 50%;background-color: ' + conf.divs.ico.backgroundColor + ';width: ' + conf.divs.ico.size.x + 'px;height: ' + conf.divs.ico.size.y + 'px;box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);}'
-		stringcss += ''
+		stringcss += '.info {position: absolute;top:100%;text-align:center;border-radius: .2rem;padding:0 .5rem;background-color: ' + conf.divs.info.backgroundColor + ';width:max-content;height: ' + conf.divs.info.size.y + 'px;box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);}'
 		return stringcss
 	}
 

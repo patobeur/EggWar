@@ -56,6 +56,12 @@ class Config {
 						size: { x: 30, y: 30, z: 30 },
 						backgroundColor: 'rgba(255,220,150,1)',
 						parent: 'mobdiv'
+					},
+					info: {
+						className: 'info',
+						size: { x: 40, y: 20, z: 40 },
+						backgroundColor: 'rgba(255,255,255,.5)',
+						parent: 'mobdiv'
 					}
 				},
 			},
