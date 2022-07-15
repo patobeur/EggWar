@@ -18,7 +18,8 @@ class Game {
 	}
 	#init_() {
 		// ----------- mobs
-		let liste = ['Antho', 'Benoist', 'Renaud', 'Eslam', 'Charles-L', 'Guillaume', 'Pyl', 'Rémi', 'Audrey', 'Cédric', 'Feun']
+		// let liste = ['Antho', 'Benoist', 'Renaud', 'Eslam', 'Charles-L', 'Guillaume', 'Pyl', 'Rémi', 'Audrey', 'Cédric', 'Feun']
+		let liste = ['Alice', 'Bob']
 		liste.forEach(element => {
 
 			this.#Mobs.addOne(element)

@@ -47,7 +47,7 @@ class Config {
 					},
 					dir: {
 						className: 'dir',
-						size: { x: 8, y: 3, z: 4 },
+						size: { x: 10, y: 8, z: 4 },
 						backgroundColor: 'rgba(0, 0, 0, 0.8)',
 						parent: 'range'
 					},

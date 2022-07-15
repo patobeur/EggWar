@@ -76,12 +76,13 @@ class MobsIa {
 			this.#conf.theta.cur,
 			this.#conf.speed
 		)
+
+
 		this.#conf.position.y = nextpos.y
 		this.#conf.position.x = nextpos.x
 
-
-		this.#Mob.mobdiv.style.top = (nextpos.y - (this.#conf.position.y / 2)) + 'px'
-		this.#Mob.mobdiv.style.left = (nextpos.x - (this.#conf.position.x / 2)) + 'px'
+		this.#Mob.mobdiv.style.top = (nextpos.y - (this.#conf.divs.mobdiv.size.y / 2)) + 'px'
+		this.#Mob.mobdiv.style.left = (nextpos.x - (this.#conf.divs.mobdiv.size.x / 2)) + 'px'
 
 	}
 	#changeDir() {
