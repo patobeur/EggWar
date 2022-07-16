@@ -29,6 +29,12 @@ class Mob {
 		this.set_divAttrib('prima', (this.#conf.position.x - (this.#conf.divs.prima.size.x / 2)) + 'px', 'style', 'left')
 	}
 	// -------------------------------------------------------------
+	#set_MobDivs() {
+		for (var key in this.#conf.divs) {
+			this.#divs[key] = document.createElement('div')
+		};
+	}
+	// -------------------------------------------------------------
 	get_nickName() {
 		return this.#conf.nickName
 	}
@@ -48,10 +54,5 @@ class Mob {
 				this.#divs[target][attribute] = value
 			}
 		}
-	}
-	#set_MobDivs() {
-		for (var key in this.#conf.divs) {
-			this.#divs[key] = document.createElement('div')
-		};
 	}
 }

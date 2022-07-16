@@ -13,7 +13,7 @@ class Animate {
 	}
 	#init_ = () => {
 		console.log('mobs:', this.#AllMobs)
-		console.log('Players:', this.#AllPlayers)
+		// console.log('Players:', this.#AllPlayers)
 		this.#interval = this.#Config.get_('Animate').interval
 	}
 	#animate = () => {
