@@ -1,28 +1,27 @@
 class Mobs {
-	#Config
 	#AllMobs
 	#CurrentMobImmat
 	#Formula
-	constructor(Config) {
-		this.#Config = Config
+	constructor() {
+		this.mobConf = new MobConfig()
 		this.#AllMobs = []
 		this.#CurrentMobImmat = 0
 		this.#Formula = new Formula()
 	}
 
-	addOne(name = false, mobType = 'mobs') {
-		let newConf = this.#Config.get_(mobType)
+	addOne(nickname = false, mobType = 'mobs') {
+		let conf = this.mobConf.get_(mobType)
 
-		newConf.position = this.#Formula.get_aleaPosOnScreen(newConf.divs.mobdiv.size)
-		newConf.theta.cur = this.#Formula.get_aleaEntreBornes(0, 360)
-		newConf.name = (!name === false) ? name : 'Clone_' + this.#Formula.get_aleaEntreBornes(1, 99999);
-		newConf.id = 'Mob_' + this.#CurrentMobImmat
-		// newConf.navigator = navigator
+		// adding basics datas to conf
+		conf.immat = this.#CurrentMobImmat
+		conf.id = 'M_' + conf.immat
+
+		conf.position = this.#Formula.get_aleaPosOnScreen(conf.divs.prima.size)
+		conf.nickname = (!nickname === false) ? nickname : new String('UnNamed_') + conf.immat;
+		conf.theta.cur = this.#Formula.rand(0, 360)
 
 		let newmob = new Mob(
-			name,
-			newConf,
-			this.#CurrentMobImmat
+			conf
 		)
 
 		this.#AllMobs.push(newmob)

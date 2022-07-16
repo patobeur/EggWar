@@ -2,36 +2,41 @@
 class Game {
 	#Config
 	#Animate
-	// mobs
+
 	#Mobs;
 	#allMobs
 
-	// dom html
+	#Players
+	#allPlayers
+
 	#Dom
 	constructor() {
 		this.#Config = new Config()
 		this.#Dom = new Dom(this.#Config)
-		this.#Mobs = new Mobs(this.#Config)
+		this.#Mobs = new Mobs()
+		// this.#Players = new Players(this.#Config)
 		// --
 		this.#init_()
 		// this.#add_event()
 	}
 	#init_() {
+		let liste = ['Alice', 'Bob']//, 'Guillaume', 'Pyl', 'Charlotte', 'Frédéric', 'Rémi', 'Eslam', 'Charles-L', 'Audrey', 'Cédric' 'Antho', 'Renaud', 'Feun']
 
-		// let liste = ['Antho', 'Benoist', 'Renaud', 'Eslam', 'Charles-L', 'Guillaume', 'Pyl', 'Rémi', 'Audrey', 'Cédric', 'Feun']
-
-		['Alice', 'Bob'].forEach(element => {
-
+		liste.forEach(element => {
 			this.#Mobs.addOne(element)
-
 		});
 
 		this.#allMobs = this.#Mobs.get_allMobs()
 
 		this.#Dom.add_AllMobsToDom(this.#allMobs)
 
-		this.#Animate = new Animate(this.#Config, this.#allMobs)
 
+
+		// this.#Players.addOnePlayer('Feu')
+		// this.#allPlayers = this.#Players.get_allPlayers()
+
+
+		this.#Animate = new Animate(this.#Config, this.#allMobs, this.#allPlayers)
 		this.start()
 
 

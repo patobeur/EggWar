@@ -1,11 +1,12 @@
 class Dom {
 	#Config
-
+	#MobConfig
 	#Body;
 	#GameDiv
 
 	constructor(Config) {
 		this.#Config = Config
+		this.#MobConfig = new MobConfig()
 		this.#init_()
 	}
 
@@ -19,39 +20,47 @@ class Dom {
 		this.#GameDiv.id = this.#Config.get_('dom').gameDivId
 		this.#GameDiv.className = this.#Config.get_('dom').className
 		this.#add_ToTargetDomElem(this.#GameDiv, this.#Body)
+
 		this.#cssMaker()
 	}
 
 	add_AllMobsToDom(Mobs) {
 		if (typeof Mobs === 'object') {
 			Mobs.forEach(mob => {
-				this.#add_OneMobToDom(mob)
-				this.#add_ToTargetDomElem(mob.get_div('mobdiv'), this.#GameDiv)
+				this.#set_MobDivs(mob)
+
+				let mobPrimaDiv = mob.get_div('prima')
+				this.#add_ToTargetDomElem(mobPrimaDiv, this.#GameDiv)
 			});
 		}
 	}
 
-	#add_OneMobToDom(mob) {
+	#set_MobDivs(mob) {
 		let mobConf = mob.get_conf()
 
 		// get all div in this mobConf
 		for (var key in mobConf.divs) {
 			if (mobConf.divs.hasOwnProperty(key)) {
 
-				let parentdiv = mobConf.divs[key].parentDivName
+				let parentdiv = !mobConf.divs[key].parentDivName === false
 					? mob.get_div(mobConf.divs[key].parentDivName)
 					: false
 
+				// append in parent div if any
 				if (parentdiv) parentdiv.appendChild(mob.get_div(key))
-				if (!parentdiv) mob.set_div(key, mobConf.id, 'id', false)
-				if (!parentdiv) mob.set_div(key, mobConf.name, 'data-name', false)
 
-				if (key === 'info') mob.set_div(key, mobConf.name, 'textContent', false)
-
-				mob.set_div(key, mobConf.divs[key].className, 'className', false)
+				mob.set_divAttrib(key, mobConf.divs[key].className, 'className', false)
 
 			}
 		}
+		mob.set_divAttrib('info', mobConf.nickname, 'textContent', false)
+
+		mob.set_divAttrib('prima', mobConf.id, 'id', false)
+		mob.set_divAttrib('prima', mobConf.nickname, 'data-nickname', false)
+		mob.set_divAttrib('prima', mobConf.position.x + 'px', 'style', 'left')
+		mob.set_divAttrib('prima', mobConf.position.y + 'px', 'style', 'top')
+		// mob.set_divAttrib('range', mobConf.position.y + 'px', 'style', 'top')
+
 	}
 	#add_ToTargetDomElem(element, target = false) {
 		if (target && element) { target.appendChild(element); }
@@ -60,8 +69,9 @@ class Dom {
 
 	// -------------------------------------------------------------
 	#cssMaker = () => {
-		let stringcss = this.#get_localCss()
-		this.#addCssToDom(stringcss, 'mobs')
+		// mobs css
+		let mobsCss = this.#get_MobsCss()
+		this.#addCssToDom(mobsCss, 'mobs')
 	}
 
 	#addCssToDom(stringcss, styleid) {
@@ -70,10 +80,10 @@ class Dom {
 		style.id = styleid
 		document.getElementsByTagName('head')[0].appendChild(style);
 	}
-	#get_localCss() {
-		let conf = this.#Config.get_('mobs')
+	#get_MobsCss() {
+		let conf = this.#MobConfig.get_('mobs')
 
-		let stringcss = '.mobdiv {position: relative;border-radius: 50%;display: flex;justify-content: center;align-items: center;width: ' + conf.divs.range.size.x + 'px;height: ' + conf.divs.range.size.y + 'px;}'
+		let stringcss = '.prima {position: relative;border-radius: 50%;display: flex;justify-content: center;align-items: center;width: ' + conf.divs.range.size.x + 'px;height: ' + conf.divs.range.size.y + 'px;}'
 		stringcss += '.range {position: absolute;display: flex;justify-content: center;align-items: flex-end;border-radius: 50%;background-color: ' + conf.divs.range.backgroundColor + ';width: ' + conf.divs.range.size.x + 'px;height: ' + conf.divs.range.size.y + 'px;transition: transform 1s ease;}'
 		stringcss += '.dir {position: absolute;border-radius: 50%;background-color: ' + conf.divs.dir.backgroundColor + ';width: ' + conf.divs.dir.size.x + 'px;height: ' + conf.divs.dir.size.y + 'px;}'
 		stringcss += '.ico {position: absolute;border-radius: 50%;text-align:center;background-color: ' + conf.divs.ico.backgroundColor + ';width: ' + conf.divs.ico.size.x + 'px;height: ' + conf.divs.ico.size.y + 'px;box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);}'

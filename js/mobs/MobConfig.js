@@ -1,28 +1,37 @@
-class Config {
-	#Config
+class MobConfig {
+	#config
 	constructor() {
-		this.#Config = this.#get_config()
+		this.#config = this.#get_config()
 	}
 	get_(parent, value = false) {
-		let confParent = this.#Config[parent] ?? false;
-		let confValue = confParent[value] ? confParent[value] : confParent ? confParent : false;
+		let confParent = this.#config[parent] ?? false;
+		let confValue = confParent[value]
+			? confParent[value]
+			: confParent
+				? confParent
+				: false;
 		return { ...confValue }
 	}
 	#get_config() {
 		const config = {
-			dom: {
-				gameDivId: 'Game',
-				className: 'radientbg'
-			},
-			players: {
-				immat: 0,
-				room: { id: 0 },
+			mobs: {
 				lv: 0,
 				speed: 1,
 				theta: {
 					cur: 0,
 					min: 0,
 					max: 360
+				},
+				ia: {
+					// can change mind every x milisec
+					changeAction: {
+						cur: 0,
+						min: 0,
+						max: 30,
+						choice: 0,
+						lastAction: 0
+					},
+					dirAmplitude: 360 / 8
 				},
 				divs: {
 					prima: {
@@ -50,7 +59,7 @@ class Config {
 						divName: 'ico',
 						className: 'ico',
 						size: { x: 30, y: 30, z: 30 },
-						backgroundColor: 'rgba(255,150,150,1)',
+						backgroundColor: 'rgba(255,220,150,1)',
 						parentDivName: 'prima'
 					},
 					info: {
@@ -61,9 +70,6 @@ class Config {
 						parentDivName: 'prima'
 					}
 				},
-			},
-			Animate: {
-				interval: 50
 			}
 		}
 		return { ...config }
