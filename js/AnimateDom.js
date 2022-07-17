@@ -1,18 +1,57 @@
-class Dom {
+class AnimateDom {
 	#Config
+	// #Mobs
+	#AllMobs
+	#AllPlayers
+	#interval
+	#Render
+
+	// dom
 	#MobConfig
 	#Body;
 	#GameDiv
-
-	constructor(Config) {
+	constructor(Config, AllMobs, AllPlayers) {
 		this.#Config = Config
+		this.#AllMobs = AllMobs
+		this.#AllPlayers = AllPlayers
+
 		this.#MobConfig = new MobConfig()
+
+		this.#init_Dom()
 		this.#init_()
 	}
+	#init_ = () => {
+		console.log('mobs:', this.#AllMobs)
+		// console.log('Players:', this.#AllPlayers)
+		this.#interval = this.#Config.get_('AnimateDom').interval
+	}
+	#animate = () => {
+		if (this.#AllMobs.length > 0) {
+			this.#AllMobs.forEach(mob => {
+				mob.update()
 
-	#init_() {
+			});
+		}
+	}
+	start_AnimateDom() {
+		this.#Render = setInterval(this.#animate, this.#interval)
+	}
+	stop_AnimateDom() {
+		clearInterval(this.#Render);
+	}
+
+
+	// -------------------------------------------------------------
+	#init_Dom = () => {
+
 		this.#Body = document.body
 		this.#init_GameDiv()
+		this.add_AllMobsToDom(this.#AllMobs)
+	}
+	#cssMaker = () => {
+		// mobs css
+		let mobsCss = this.#get_MobsCss()
+		this.#addCssToDom(mobsCss, 'mobs')
 	}
 
 	#init_GameDiv() {
@@ -23,18 +62,10 @@ class Dom {
 
 		this.#cssMaker()
 	}
-
-	add_AllMobsToDom(Mobs) {
-		if (typeof Mobs === 'object') {
-			Mobs.forEach(mob => {
-				this.#set_MobDivs(mob)
-
-				let mobPrimaDiv = mob.get_div('prima')
-				this.#add_ToTargetDomElem(mobPrimaDiv, this.#GameDiv)
-			});
-		}
+	#add_ToTargetDomElem(element, target = false) {
+		if (target && element) { target.appendChild(element); }
+		else { console.warn('appenchild impossible') }
 	}
-
 	#set_MobDivs(mob) {
 		let mobConf = mob.get_conf()
 
@@ -62,18 +93,6 @@ class Dom {
 		// mob.set_divAttrib('range', mobConf.position.y + 'px', 'style', 'top')
 
 	}
-	#add_ToTargetDomElem(element, target = false) {
-		if (target && element) { target.appendChild(element); }
-		else { console.warn('appenchild impossible') }
-	}
-
-	// -------------------------------------------------------------
-	#cssMaker = () => {
-		// mobs css
-		let mobsCss = this.#get_MobsCss()
-		this.#addCssToDom(mobsCss, 'mobs')
-	}
-
 	#addCssToDom(stringcss, styleid) {
 		let style = document.createElement('style');
 		style.textContent = stringcss
@@ -91,5 +110,14 @@ class Dom {
 
 		return stringcss
 	}
+	add_AllMobsToDom(Mobs) {
+		if (typeof Mobs === 'object') {
+			Mobs.forEach(mob => {
+				this.#set_MobDivs(mob)
 
+				let mobPrimaDiv = mob.get_div('prima')
+				this.#add_ToTargetDomElem(mobPrimaDiv, this.#GameDiv)
+			});
+		}
+	}
 }

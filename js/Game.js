@@ -1,7 +1,7 @@
 
 class Game {
 	#Config
-	#Animate
+	#AnimateDom
 
 	#Mobs;
 	#allMobs
@@ -12,7 +12,6 @@ class Game {
 	#Dom
 	constructor() {
 		this.#Config = new Config()
-		this.#Dom = new Dom(this.#Config)
 		this.#Mobs = new Mobs()
 		// this.#Players = new Players(this.#Config)
 		// --
@@ -28,12 +27,10 @@ class Game {
 
 		this.#allMobs = this.#Mobs.get_allMobs()
 
-		this.#Dom.add_AllMobsToDom(this.#allMobs)
-
 		// this.#Players.addOnePlayer('Feu')
 		// this.#allPlayers = this.#Players.get_allPlayers()
 
-		this.#Animate = new Animate(this.#Config, this.#allMobs) //, this.#allPlayers)
+		this.#AnimateDom = new AnimateDom(this.#Config, this.#allMobs) //, this.#allPlayers)
 		this.start()
 
 	}
@@ -43,6 +40,6 @@ class Game {
 		// }
 	}
 	start() {
-		this.#Animate.start_Animate()
+		this.#AnimateDom.start_AnimateDom()
 	}
 }

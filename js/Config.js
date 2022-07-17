@@ -62,7 +62,7 @@ class Config {
 					}
 				},
 			},
-			Animate: {
+			AnimateDom: {
 				interval: 50
 			}
 		}
