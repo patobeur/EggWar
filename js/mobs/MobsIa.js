@@ -15,6 +15,7 @@ class MobsIa {
 	}
 	#chooseDir(conf) {
 		let dir = this.Formula.rand(0, 1) > 0 ? -1 : 1;
+		console.log('chooseDir', dir)
 		conf.theta.cur += Math.floor(dir * conf.ia.dirAmplitude)
 
 	}
