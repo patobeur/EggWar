@@ -6,8 +6,8 @@ class Game {
 	#Mobs;
 	#allMobs
 
-	#Players
-	#allPlayers
+	// #Players
+	// #allPlayers
 
 	#Dom
 	constructor() {
@@ -30,21 +30,17 @@ class Game {
 
 		this.#Dom.add_AllMobsToDom(this.#allMobs)
 
-
-
 		// this.#Players.addOnePlayer('Feu')
 		// this.#allPlayers = this.#Players.get_allPlayers()
 
-
-		this.#Animate = new Animate(this.#Config, this.#allMobs, this.#allPlayers)
+		this.#Animate = new Animate(this.#Config, this.#allMobs) //, this.#allPlayers)
 		this.start()
-
 
 	}
 	#add_event() {
-		window.onresize = () => {
-			// console.log(window.innerWidth, window.innerHeight)
-		}
+		// window.onresize = () => {
+		// 	console.log(window.innerWidth, window.innerHeight)
+		// }
 	}
 	start() {
 		this.#Animate.start_Animate()
