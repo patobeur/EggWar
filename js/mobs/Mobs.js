@@ -13,7 +13,7 @@ class Mobs {
 
 		this.mobConf = new MobConfig()
 
-		// i get a clone of the default config
+		// i get a clone with the default config
 		let conf = this.mobConf.get_(mobType)
 
 		// adding basics to feet the needs

@@ -11,17 +11,15 @@ class Mob {
 	#init() {
 		this.#set_MobDivs()
 
-		this.#ia = new MobsIa() // is this bad clone ??
+		this.#ia = new MobsIa()
 
 		return this
 	}
 	update = () => {
 		this.#ia.iaAction(this.#conf)
 		this.#refresh_Div()
-		// console.log(this.#conf)
 	};
 	#refresh_Div() {
-		// BUGGY		// BUGGY		// BUGGY
 		this.set_divAttrib('range', 'rotate(' + this.#conf.theta.cur + 'deg)', 'style', 'transform')
 		this.set_divAttrib('ico', this.#conf.theta.cur + '°', 'textContent', false)
 		this.set_divAttrib('prima', (this.#conf.position.y - (this.#conf.divs.prima.size.y / 2)) + 'px', 'style', 'top')

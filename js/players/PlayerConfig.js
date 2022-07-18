@@ -24,12 +24,23 @@ class PlayerConfig {
 					min: 0,
 					max: 360
 				},
+				ia: {
+					// can change mind every x milisec
+					changeAction: {
+						cur: 0,
+						min: 0,
+						max: 5,
+						choice: 0,
+						lastAction: 0
+					},
+					dirAmplitude: 360 / 8
+				},
 				divs: {
 					prima: {
 						divName: 'prima',
 						className: 'prima',
 						size: { x: 2, y: 2, z: 2 },
-						backgroundColor: 'yellow',
+						backgroundColor: 'green',
 						parentDivName: false
 					},
 					range: {

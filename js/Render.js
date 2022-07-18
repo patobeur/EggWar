@@ -25,10 +25,15 @@ class Render {
 		this.#interval = this.#GameConfig.get_('Render').interval
 	}
 	#render = () => {
+
 		if (this.#AllMobs.length > 0) {
 			this.#AllMobs.forEach(mob => {
 				mob.update()
-
+			});
+		}
+		if (this.#AllPlayers.length > 0) {
+			this.#AllPlayers.forEach(player => {
+				player.update()
 			});
 		}
 	}
@@ -45,6 +50,9 @@ class Render {
 		this.#Body = document.body
 		this.#init_GameDiv()
 		this.add_AllMobsToDom(this.#AllMobs)
+
+		this.add_AllPlayerToDom(this.#AllPlayers)
+
 		console.log('added mobs:', this.#AllMobs)
 		console.log('waiting players:', this.#AllPlayers)
 	}
@@ -84,13 +92,38 @@ class Render {
 
 			}
 		}
-		mob.set_divAttrib('info', mobConf.nickname, 'textContent', false)
+		mob.set_divAttrib('info', '*' + mobConf.nickname, 'textContent', false)
 
 		mob.set_divAttrib('prima', mobConf.id, 'id', false)
 		mob.set_divAttrib('prima', mobConf.nickname, 'data-nickname', false)
 		mob.set_divAttrib('prima', mobConf.position.x + 'px', 'style', 'left')
 		mob.set_divAttrib('prima', mobConf.position.y + 'px', 'style', 'top')
 		// mob.set_divAttrib('range', mobConf.position.y + 'px', 'style', 'top')
+
+	}
+	#set_PlayerDivs(player) {
+		let playerConf = player.conf
+
+		// get all div in this playerConf
+		for (var key in playerConf.divs) {
+			if (playerConf.divs.hasOwnProperty(key)) {
+				let parentdiv = !playerConf.divs[key].parentDivName === false
+					? player.divs[key].parentDivName
+					: false
+
+				// append in parent div if any
+				if (parentdiv) parentdiv.appendChild(player[key])
+
+				player.set_divAttrib(player, key, playerConf.divs[key].className, 'className', false)
+
+			}
+		}
+		player.set_divAttrib(player, 'info', '*' + playerConf.nickname, 'textContent', false)
+
+		player.set_divAttrib(player, 'prima', playerConf.id, 'id', false)
+		player.set_divAttrib(player, 'prima', playerConf.nickname, 'data-nickname', false)
+		player.set_divAttrib(player, 'prima', playerConf.position.x + 'px', 'style', 'left')
+		player.set_divAttrib(player, 'prima', playerConf.position.y + 'px', 'style', 'top')
 
 	}
 	#addCssToDom(stringcss, styleid) {
@@ -117,6 +150,16 @@ class Render {
 
 				let mobPrimaDiv = mob.get_div('prima')
 				this.#add_ToTargetDomElem(mobPrimaDiv, this.#GameDiv)
+			});
+		}
+	}
+	add_AllPlayerToDom(Players) {
+		if (typeof Players === 'object') {
+			Players.forEach(player => {
+				this.#set_PlayerDivs(player)
+
+				let playerPrimaDiv = player.divs.prima
+				this.#add_ToTargetDomElem(playerPrimaDiv, this.#GameDiv)
 			});
 		}
 	}
