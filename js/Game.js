@@ -27,7 +27,7 @@ class Game {
 		gentils.forEach(element => this.#Players.addOne(element));
 		this.#allPlayers = this.#Players.get_allPlayers()
 
-		this.#Render = new Render(this.#GameConfig, this.#allMobs, this.#allPlayers)
+		this.#Render = new Render(this.#allMobs, this.#allPlayers)
 		this.#start()
 	}
 	#start() {

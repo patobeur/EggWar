@@ -1,5 +1,6 @@
 class Render {
 	#GameConfig
+	#Formula
 
 	#AllMobs
 	#AllPlayers
@@ -12,13 +13,16 @@ class Render {
 	#PlayerConfig
 	#Body;
 	#GameDiv
-	constructor(GameConfig, AllMobs, AllPlayers) {
-		this.#GameConfig = GameConfig
+	constructor(AllMobs, AllPlayers) {
+		this.#MobConfig = new MobConfig()
+		this.#PlayerConfig = new PlayerConfig()
+
+		this.#GameConfig = new GameConfig()
+
+		this.#Formula = new Formula()
 		this.#AllMobs = AllMobs
 		this.#AllPlayers = AllPlayers
 
-		this.#MobConfig = new MobConfig()
-		this.#PlayerConfig = new PlayerConfig()
 
 		this.#init_Dom()
 		this.#init_()
@@ -170,8 +174,8 @@ class Render {
 			Players.forEach(player => {
 				this.#set_PlayerDivs(player)
 
-				let playerPrimaDiv = player.divs.prima
-				this.#add_ToTargetDomElem(playerPrimaDiv, this.#GameDiv)
+				let primaDiv = player.divs.prima
+				this.#add_ToTargetDomElem(primaDiv, this.#GameDiv)
 			});
 		}
 	}
