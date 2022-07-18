@@ -9,6 +9,7 @@ class Render {
 
 	// dom
 	#MobConfig
+	#PlayerConfig
 	#Body;
 	#GameDiv
 	constructor(GameConfig, AllMobs, AllPlayers) {
@@ -17,6 +18,7 @@ class Render {
 		this.#AllPlayers = AllPlayers
 
 		this.#MobConfig = new MobConfig()
+		this.#PlayerConfig = new PlayerConfig()
 
 		this.#init_Dom()
 		this.#init_()
@@ -59,7 +61,10 @@ class Render {
 	#cssMaker = () => {
 		// mobs css
 		let mobsCss = this.#get_MobsCss()
-		this.#addCssToDom(mobsCss, 'mobs')
+		this.#addCssToDom(mobsCss, 'mobscss')
+		// player css
+		let playerCss = this.#get_PlayersCss()
+		this.#addCssToDom(playerCss, 'playerscss')
 	}
 
 	#init_GameDiv() {
@@ -88,7 +93,7 @@ class Render {
 				// append in parent div if any
 				if (parentdiv) parentdiv.appendChild(mob.get_div(key))
 
-				mob.set_divAttrib(key, mobConf.divs[key].className, 'className', false)
+				mob.set_divAttrib(key, 'vilains ' + mobConf.divs[key].className, 'className', false)
 
 			}
 		}
@@ -103,18 +108,22 @@ class Render {
 	}
 	#set_PlayerDivs(player) {
 		let playerConf = player.conf
-
 		// get all div in this playerConf
+		console.log('---------')
 		for (var key in playerConf.divs) {
 			if (playerConf.divs.hasOwnProperty(key)) {
+
+				// console.log(playerConf.divs[key])
+
 				let parentdiv = !playerConf.divs[key].parentDivName === false
 					? player.divs[key].parentDivName
 					: false
 
+				// console.log(parentdiv, player.divs[key].parentDivName)
 				// append in parent div if any
 				if (parentdiv) parentdiv.appendChild(player[key])
 
-				player.set_divAttrib(player, key, playerConf.divs[key].className, 'className', false)
+				player.set_divAttrib(player, key, 'gentils ' + playerConf.divs[key].className, 'className', false)
 
 			}
 		}
@@ -135,11 +144,22 @@ class Render {
 	#get_MobsCss() {
 		let conf = this.#MobConfig.get_('mobs')
 
-		let stringcss = '.prima {position: relative;border-radius: 50%;display: flex;justify-content: center;align-items: center;width: ' + conf.divs.range.size.x + 'px;height: ' + conf.divs.range.size.y + 'px;}'
-		stringcss += '.range {position: absolute;display: flex;justify-content: center;align-items: flex-end;border-radius: 50%;background-color: ' + conf.divs.range.backgroundColor + ';width: ' + conf.divs.range.size.x + 'px;height: ' + conf.divs.range.size.y + 'px;transition: transform 1s ease;}'
-		stringcss += '.dir {position: absolute;border-radius: 50%;background-color: ' + conf.divs.dir.backgroundColor + ';width: ' + conf.divs.dir.size.x + 'px;height: ' + conf.divs.dir.size.y + 'px;}'
-		stringcss += '.ico {position: absolute;border-radius: 50%;text-align:center;background-color: ' + conf.divs.ico.backgroundColor + ';width: ' + conf.divs.ico.size.x + 'px;height: ' + conf.divs.ico.size.y + 'px;box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);}'
-		stringcss += '.info {color:white;position: absolute;top:60%;text-align:center;border-radius: .2rem;padding:0 .5rem;background-color: ' + conf.divs.info.backgroundColor + ';width:max-content;height: ' + conf.divs.info.size.y + 'px;box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);}'
+		let stringcss = '.vilains.prima {position: relative;border-radius: 50%;display: flex;justify-content: center;align-items: center;width: ' + conf.divs.range.size.x + 'px;height: ' + conf.divs.range.size.y + 'px;}'
+		stringcss += '.vilains .range {position: absolute;display: flex;justify-content: center;align-items: flex-end;border-radius: 50%;background-color: ' + conf.divs.range.backgroundColor + ';width: ' + conf.divs.range.size.x + 'px;height: ' + conf.divs.range.size.y + 'px;transition: transform 1s ease;}'
+		stringcss += '.vilains .dir {position: absolute;border-radius: 50%;background-color: ' + conf.divs.dir.backgroundColor + ';width: ' + conf.divs.dir.size.x + 'px;height: ' + conf.divs.dir.size.y + 'px;}'
+		stringcss += '.vilains .ico {position: absolute;border-radius: 50%;text-align:center;background-color: ' + conf.divs.ico.backgroundColor + ';width: ' + conf.divs.ico.size.x + 'px;height: ' + conf.divs.ico.size.y + 'px;box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);}'
+		stringcss += '.vilains .info {color:white;position: absolute;top:60%;text-align:center;border-radius: .2rem;padding:0 .5rem;background-color: ' + conf.divs.info.backgroundColor + ';width:max-content;box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);}'//height: ' + conf.divs.info.size.y + 'px;
+
+		return stringcss
+	}
+	#get_PlayersCss() {
+		let conf = this.#PlayerConfig.get_('players')
+
+		let stringcss = '.gentils.prima {position: relative;border-radius: 50%;display: flex;justify-content: center;align-items: center;width: ' + conf.divs.range.size.x + 'px;height: ' + conf.divs.range.size.y + 'px;}'
+		stringcss += '.gentils .range {position: absolute;display: flex;justify-content: center;align-items: flex-end;border-radius: 50%;background-color: ' + conf.divs.range.backgroundColor + ';width: ' + conf.divs.range.size.x + 'px;height: ' + conf.divs.range.size.y + 'px;transition: transform 1s ease;}'
+		stringcss += '.gentils .dir {position: absolute;border-radius: 50%;background-color: ' + conf.divs.dir.backgroundColor + ';width: ' + conf.divs.dir.size.x + 'px;height: ' + conf.divs.dir.size.y + 'px;}'
+		stringcss += '.gentils .ico {position: absolute;border-radius: 50%;text-align:center;background-color: ' + conf.divs.ico.backgroundColor + ';width: ' + conf.divs.ico.size.x + 'px;height: ' + conf.divs.ico.size.y + 'px;box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);}'
+		stringcss += '.gentils .info {color:white;position: absolute;top:60%;text-align:center;border-radius: .2rem;padding:0 .5rem;background-color: ' + conf.divs.info.backgroundColor + ';width:max-content;box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);}'//height: ' + conf.divs.info.size.y + 'px;
 
 		return stringcss
 	}
