@@ -86,6 +86,7 @@ class Render {
 		for (var key in mobConf.divs) {
 			if (mobConf.divs.hasOwnProperty(key)) {
 
+				// define parent if any
 				let parentdiv = !mobConf.divs[key].parentDivName === false
 					? mob.get_div(mobConf.divs[key].parentDivName)
 					: false
@@ -107,32 +108,29 @@ class Render {
 
 	}
 	#set_PlayerDivs(player) {
-		let playerConf = player.conf
+
 		// get all div in this playerConf
-		console.log('---------')
-		for (var key in playerConf.divs) {
-			if (playerConf.divs.hasOwnProperty(key)) {
+		for (var key in player.conf.divs) {
+			if (player.conf.divs.hasOwnProperty(key)) {
 
-				// console.log(playerConf.divs[key])
-
-				let parentdiv = !playerConf.divs[key].parentDivName === false
-					? player.divs[key].parentDivName
+				// define parent if any
+				let parentdiv = !player.conf.divs[key].parentDivName === false
+					? player.divs[player.conf.divs[key].parentDivName]
 					: false
 
-				// console.log(parentdiv, player.divs[key].parentDivName)
 				// append in parent div if any
-				if (parentdiv) parentdiv.appendChild(player[key])
+				if (parentdiv) parentdiv.appendChild(player.divs[key])
 
-				player.set_divAttrib(player, key, 'gentils ' + playerConf.divs[key].className, 'className', false)
+				player.set_divAttrib(player, key, 'gentils ' + player.conf.divs[key].className, 'className', false)
 
 			}
 		}
-		player.set_divAttrib(player, 'info', '*' + playerConf.nickname, 'textContent', false)
+		player.set_divAttrib(player, 'info', '*' + player.conf.nickname, 'textContent', false)
 
-		player.set_divAttrib(player, 'prima', playerConf.id, 'id', false)
-		player.set_divAttrib(player, 'prima', playerConf.nickname, 'data-nickname', false)
-		player.set_divAttrib(player, 'prima', playerConf.position.x + 'px', 'style', 'left')
-		player.set_divAttrib(player, 'prima', playerConf.position.y + 'px', 'style', 'top')
+		player.set_divAttrib(player, 'prima', player.conf.id, 'id', false)
+		player.set_divAttrib(player, 'prima', player.conf.nickname, 'data-nickname', false)
+		player.set_divAttrib(player, 'prima', player.conf.position.x + 'px', 'style', 'left')
+		player.set_divAttrib(player, 'prima', player.conf.position.y + 'px', 'style', 'top')
 
 	}
 	#addCssToDom(stringcss, styleid) {

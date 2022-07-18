@@ -46,7 +46,7 @@ class PlayerConfig {
 					range: {
 						divName: 'range',
 						className: 'range',
-						size: { x: 80, y: 80, z: 80 },
+						size: { x: 50, y: 50, z: 50 },
 						backgroundColor: 'rgba(255, 255, 255, .95)',
 						parentDivName: 'prima'
 					},
@@ -60,7 +60,7 @@ class PlayerConfig {
 					ico: {
 						divName: 'ico',
 						className: 'ico',
-						size: { x: 30, y: 30, z: 30 },
+						size: { x: 20, y: 20, z: 20 },
 						backgroundColor: 'rgba(255,150,150,1)',
 						parentDivName: 'prima'
 					},
