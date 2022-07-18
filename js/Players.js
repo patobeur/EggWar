@@ -30,6 +30,10 @@ class Players {
 		// add basics to player
 		newPlayer = { conf: conf }
 
+
+		// adding iaMob to player but this is just for testing
+		// need more info for the rest !!
+		// keyboard controller needed
 		newPlayer.ia = new MobsIa()
 
 		newPlayer.update = () => {
