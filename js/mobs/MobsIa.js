@@ -3,14 +3,10 @@ class MobsIa {
 		this.Formula = new Formula()
 	}
 	iaAction(conf) {
-		// if (conf.ia.changeAction.cur === 0) {
-		// 	this.#chooseDir(conf)
-		// }
-
-
 		if (conf.ia.changeAction.cur === 0) {
 
-			conf.ia.changeAction.lastAction = conf.ia.changeAction.currentAction
+			// save old action
+			// conf.ia.changeAction.lastAction = conf.ia.changeAction.currentAction
 
 			// new random action
 			let randDir = this.Formula.rand(0, 4)
@@ -37,7 +33,6 @@ class MobsIa {
 		conf.ia.changeAction.cur = conf.ia.changeAction.cur > conf.ia.changeAction.max
 			? 0
 			: conf.ia.changeAction.cur + 1
-
 	}
 	#chooseDir(conf) {
 		let dir = this.Formula.rand(0, 1) > .5 ? 1 : -1;

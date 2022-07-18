@@ -61,9 +61,7 @@ class Players {
 
 		// push a fresh mob with fresh conf to allMob arrray
 		this.#AllPlayers.push(newPlayer)
-		// this.#AllPlayers.push(new Player(
-		// 	conf
-		// ))
+
 		// set the new immat
 		this.#CurrentPlayerImmat = this.#AllPlayers.length
 	}
@@ -75,9 +73,7 @@ class Players {
 		player.set_divAttrib('prima', (player.conf.position.x - (player.conf.divs.prima.size.x / 2)) + 'px', 'style', 'left')
 		player.set_divAttrib('prima', 'toto', 'data-nickname', false)
 	}
-	// -------------------------------------------------------------
 
-	// -------------------------------------------------------------
 	#set_PlayerDivs(newPlayer) {
 		newPlayer.divs = {}
 		for (var div in newPlayer.conf.divs) {

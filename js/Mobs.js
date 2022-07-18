@@ -3,7 +3,6 @@ class Mobs {
 	#CurrentMobImmat
 	#Formula
 	constructor() {
-
 		this.#AllMobs = []
 		this.#CurrentMobImmat = 0
 		this.#Formula = new Formula()
@@ -24,14 +23,12 @@ class Mobs {
 		conf.theta.cur = this.#Formula.rand(0, 360)
 
 		// push a fresh mob with fresh conf to allMob arrray
-		this.#AllMobs.push(new Mob(
-			conf
-		))
+		let newmob = new Mob(conf)
+		this.#AllMobs.push(newmob)
 
 		// set the new immat
 		this.#CurrentMobImmat = this.#AllMobs.length
 	}
-	// -------------------------------------------------------------
 	get_allMobs() {
 		return this.#AllMobs.length > 0 ? this.#AllMobs : false;
 	}
