@@ -1,19 +1,19 @@
-class Config {
-	#Config
+class PlayerConfig {
+	#config
 	constructor() {
-		this.#Config = this.#get_config()
+		this.#config = this.#get_config()
 	}
 	get_(parent, value = false) {
-		let confParent = this.#Config[parent] ?? false;
-		let confValue = confParent[value] ? confParent[value] : confParent ? confParent : false;
+		let confParent = this.#config[parent] ?? false;
+		let confValue = confParent[value]
+			? confParent[value]
+			: confParent
+				? confParent
+				: false;
 		return { ...confValue }
 	}
 	#get_config() {
 		const config = {
-			dom: {
-				gameDivId: 'Game',
-				className: 'radientbg'
-			},
 			players: {
 				immat: 0,
 				room: { id: 0 },
@@ -62,10 +62,8 @@ class Config {
 					}
 				},
 			},
-			AnimateDom: {
-				interval: 50
-			}
 		}
 		return { ...config }
 	}
+
 }

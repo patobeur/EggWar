@@ -1,8 +1,9 @@
-class AnimateDom {
-	#Config
-	// #Mobs
+class Render {
+	#GameConfig
+
 	#AllMobs
 	#AllPlayers
+
 	#interval
 	#Render
 
@@ -10,8 +11,8 @@ class AnimateDom {
 	#MobConfig
 	#Body;
 	#GameDiv
-	constructor(Config, AllMobs, AllPlayers) {
-		this.#Config = Config
+	constructor(GameConfig, AllMobs, AllPlayers) {
+		this.#GameConfig = GameConfig
 		this.#AllMobs = AllMobs
 		this.#AllPlayers = AllPlayers
 
@@ -21,11 +22,9 @@ class AnimateDom {
 		this.#init_()
 	}
 	#init_ = () => {
-		console.log('mobs:', this.#AllMobs)
-		// console.log('Players:', this.#AllPlayers)
-		this.#interval = this.#Config.get_('AnimateDom').interval
+		this.#interval = this.#GameConfig.get_('Render').interval
 	}
-	#animate = () => {
+	#render = () => {
 		if (this.#AllMobs.length > 0) {
 			this.#AllMobs.forEach(mob => {
 				mob.update()
@@ -33,20 +32,21 @@ class AnimateDom {
 			});
 		}
 	}
-	start_AnimateDom() {
-		this.#Render = setInterval(this.#animate, this.#interval)
+	start_Render() {
+		this.#Render = setInterval(this.#render, this.#interval)
 	}
-	stop_AnimateDom() {
+	stop_Render() {
 		clearInterval(this.#Render);
 	}
 
 
 	// -------------------------------------------------------------
 	#init_Dom = () => {
-
 		this.#Body = document.body
 		this.#init_GameDiv()
 		this.add_AllMobsToDom(this.#AllMobs)
+		console.log('added mobs:', this.#AllMobs)
+		console.log('waiting players:', this.#AllPlayers)
 	}
 	#cssMaker = () => {
 		// mobs css
@@ -56,8 +56,8 @@ class AnimateDom {
 
 	#init_GameDiv() {
 		this.#GameDiv = document.createElement('div')
-		this.#GameDiv.id = this.#Config.get_('dom').gameDivId
-		this.#GameDiv.className = this.#Config.get_('dom').className
+		this.#GameDiv.id = this.#GameConfig.get_('dom').gameDivId
+		this.#GameDiv.className = this.#GameConfig.get_('dom').className
 		this.#add_ToTargetDomElem(this.#GameDiv, this.#Body)
 
 		this.#cssMaker()
@@ -120,4 +120,6 @@ class AnimateDom {
 			});
 		}
 	}
+	// ------------------------------------------------
+
 }

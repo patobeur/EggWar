@@ -29,7 +29,6 @@ class Formula {
 		return neo
 	}
 
-	rand = (min, max) => { return Math.floor(Math.random() * (max - min + 1) + min) }
 
 	get_aleaPosOnScreen(size) {
 
@@ -45,8 +44,8 @@ class Formula {
 		return pos
 	}
 
+	rand = (min, max) => { return Math.floor(Math.random() * (max - min + 1) + min) }
 	degToRad = (deg) => { return deg * (Math.PI / 180); }
-
 	radToDeg = (rad) => { return rad * (180 / Math.PI); }
 
 	// get_NextOrbit2D(x, y, tetha) {

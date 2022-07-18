@@ -1,45 +1,43 @@
 
 class Game {
-	#Config
-	#AnimateDom
+	#GameConfig
+	#Render
 
 	#Mobs;
 	#allMobs
 
-	// #Players
-	// #allPlayers
+	#Players
+	#allPlayers
 
 	#Dom
 	constructor() {
-		this.#Config = new Config()
+		this.#GameConfig = new GameConfig()
 		this.#Mobs = new Mobs()
-		// this.#Players = new Players(this.#Config)
+		this.#Players = new Players()
 		// --
 		this.#init_()
 		// this.#add_event()
 	}
 	#init_() {
-		let liste = ['Alice', 'Bob']//, 'Guillaume', 'Pyl', 'Charlotte', 'Frédéric', 'Rémi', 'Eslam', 'Charles-L', 'Audrey', 'Cédric' 'Antho', 'Renaud', 'Feun']
+		let vilains = ['Alice', 'Bob']//, 'Guillaume', 'Pyl', 'Charlotte', 'Frédéric', 'Rémi', 'Eslam', 'Charles-L', 'Audrey', 'Cédric' 'Antho', 'Renaud', 'Feun']
 
-		liste.forEach(element => {
-			this.#Mobs.addOne(element)
-		});
+		vilains.forEach(element => this.#Mobs.addOne(element));
 
 		this.#allMobs = this.#Mobs.get_allMobs()
 
-		// this.#Players.addOnePlayer('Feu')
+		// let gentils = ['Tartine']
+		// gentils.forEach(element => this.#Players.addOnePlayer(element));
 		// this.#allPlayers = this.#Players.get_allPlayers()
 
-		this.#AnimateDom = new AnimateDom(this.#Config, this.#allMobs) //, this.#allPlayers)
-		this.start()
+		this.#Render = new Render(this.#GameConfig, this.#allMobs) //, this.#allPlayers)
+
+		this.#start()
+
+
+
 
 	}
-	#add_event() {
-		// window.onresize = () => {
-		// 	console.log(window.innerWidth, window.innerHeight)
-		// }
-	}
-	start() {
-		this.#AnimateDom.start_AnimateDom()
+	#start() {
+		this.#Render.start_Render()
 	}
 }

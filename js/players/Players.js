@@ -2,19 +2,18 @@ class Players {
 	#AllPlayers = [];
 	#CurrentRoomId = 0;
 	#CurrentPlayerImmat;
-	#Config;
 	#Formula;
-	constructor(Config) {
-		this.#Config = Config
+	constructor() {
 		this.#Formula = new Formula()
 		this.#AllPlayers = []
 		this.#CurrentPlayerImmat = 0
 		// this.#cssMaker()
 	}
 	addOnePlayer(nickname = false) {
-		// set a fresh conf
-		let conf = this.#Config.get_('players')
-		let newPlayer = { conf: conf }
+
+		// i get a clone of the default config
+		let conf = new PlayerConfig()
+		let newPlayer = { conf: conf.get_('players') }
 
 		newPlayer.conf.immat = this.#CurrentPlayerImmat++
 		newPlayer.conf.nickname = nickname ?? this.#Formula.rand(1, 99999)
@@ -23,15 +22,12 @@ class Players {
 		newPlayer.conf.room.id = this.#CurrentRoomId
 
 		this.#set_PlayerDivs(newPlayer)
-		this.#addToPlayersArray(newPlayer)
+		this.#AllPlayers.push(newPlayer)
 
 	}
 	update() {
 		// for (let index = 0; index < this.#AllPlayers.length; index++) {
 		// }
-	}
-	#addToPlayersArray(newPlayer) {
-		this.#AllPlayers.push(newPlayer)
 	}
 	// -------------------------------------------------------------
 	#set_PlayerDivs(newPlayer) {

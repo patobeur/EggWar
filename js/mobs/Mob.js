@@ -9,7 +9,6 @@ class Mob {
 		this.#init()
 	}
 	#init() {
-
 		this.#set_MobDivs()
 
 		this.#ia = new MobsIa() // is this bad clone ??
@@ -35,8 +34,8 @@ class Mob {
 		};
 	}
 	// -------------------------------------------------------------
-	get_nickName() {
-		return this.#conf.nickName
+	get_nickname() {
+		return this.#conf.nickname
 	}
 	get_conf() {
 		return this.#conf
