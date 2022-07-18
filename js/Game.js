@@ -19,15 +19,15 @@ class Game {
 		// this.#add_event()
 	}
 	#init_() {
-		let vilains = ['Alice', 'Bob']//, 'Guillaume', 'Pyl', 'Charlotte', 'Frédéric', 'Rémi', 'Eslam', 'Charles-L', 'Audrey', 'Cédric' 'Antho', 'Renaud', 'Feun']
+		let vilains = ['Guillaume', 'Pyl', 'Charlotte', 'Frédéric', 'Rémi', 'Eslam', 'Charles-L', 'Audrey', 'Cédric', 'Antho', 'Renaud', 'Feun']
 
 		vilains.forEach(element => this.#Mobs.addOne(element));
 
 		this.#allMobs = this.#Mobs.get_allMobs()
 
-		// let gentils = ['Tartine']
-		// gentils.forEach(element => this.#Players.addOnePlayer(element));
-		// this.#allPlayers = this.#Players.get_allPlayers()
+		let gentils = ['Alice', 'Bob']
+		gentils.forEach(element => this.#Players.addOnePlayer(element));
+		this.#allPlayers = this.#Players.get_allPlayers()
 
 		this.#Render = new Render(this.#GameConfig, this.#allMobs) //, this.#allPlayers)
 
