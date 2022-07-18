@@ -1,10 +1,10 @@
 class MobConfig {
-	#config
+	config
 	constructor() {
-		this.#config = this.#get_config()
+		this.config = this.#get_config()
 	}
 	get_(parent, value = false) {
-		let confParent = this.#config[parent] ?? false;
+		let confParent = this.config[parent] ?? false;
 		let confValue = confParent[value]
 			? confParent[value]
 			: confParent
@@ -22,6 +22,7 @@ class MobConfig {
 					min: 0,
 					max: 360
 				},
+				faction: 'vilains',
 				ia: {
 					// can change mind every x milisec
 					changeAction: {
@@ -37,38 +38,65 @@ class MobConfig {
 					prima: {
 						divName: 'prima',
 						className: 'prima',
-						size: { x: 2, y: 2, z: 2 },
-						backgroundColor: 'yellow',
-						parentDivName: false
+						size: { x: 1, y: 1, z: 1 },
+						parentDivName: false,
+						position: 'relative',
+						borderRadius: '50%',
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center',
 					},
 					range: {
 						divName: 'range',
 						className: 'range',
 						size: { x: 50, y: 50, z: 50 },
 						backgroundColor: 'rgba(255, 255, 255, .95)',
-						parentDivName: 'prima'
+						parentDivName: 'prima',
+						position: 'absolute',
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'flex-end',
+						borderRadius: '50%',
+						transition: 'transform 1s ease',
+						comment: 'colision range',
 					},
 					dir: {
 						divName: 'dir',
 						className: 'dir',
 						size: { x: 10, y: 8, z: 4 },
 						backgroundColor: 'rgba(0, 0, 0, 0.8)',
-						parentDivName: 'range'
+						parentDivName: 'range',
+						position: 'absolute',
+						borderRadius: '50%',
+
 					},
 					ico: {
 						divName: 'ico',
 						className: 'ico',
 						size: { x: 20, y: 20, z: 20 },
-						backgroundColor: 'rgba(255,220,150,1)',
-						parentDivName: 'prima'
+						backgroundColor: 'rgba(255,200,100,1)',
+						parentDivName: 'prima',
+						position: 'absolute',
+						borderRadius: '50%',
+						textAlign: 'center',
+						boxShadow: '1px 1px 2px rgba(0, 0, 0, 0.2)'
+
 					},
 					info: {
 						divName: 'info',
 						className: 'info',
 						size: { x: 40, y: 20, z: 40 },
 						backgroundColor: 'rgba(150,150,255,.8)',
-						parentDivName: 'prima'
-					}
+						parentDivName: 'prima',
+						color: 'white',
+						position: 'absolute',
+						top: '60%',
+						textAlign: 'center',
+						borderRadius: '.2rem',
+						padding: '0 .5rem',
+						width: 'max-content',
+						boxShadow: '1px 1px 2px rgba(0, 0, 0, 0.2)'
+					},
 				},
 			}
 		}

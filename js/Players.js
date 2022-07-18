@@ -45,7 +45,7 @@ class Players {
 			}
 
 		}
-		newPlayer.set_divAttrib = (player, target, value = false, attribute = false, attribute2 = false) => {
+		newPlayer.set_divAttrib = (target, value = false, attribute = false, attribute2 = false) => {
 
 			if (newPlayer.divs[target] && value) {
 				if (attribute && attribute2) {
@@ -68,10 +68,12 @@ class Players {
 		this.#CurrentPlayerImmat = this.#AllPlayers.length
 	}
 	#refresh_Div(player) {
-		player.set_divAttrib(player, 'range', 'rotate(' + player.conf.theta.cur + 'deg)', 'style', 'transform')
-		player.set_divAttrib(player, 'ico', player.conf.theta.cur + '°', 'textContent', false)
-		player.set_divAttrib(player, 'prima', (player.conf.position.y - (player.conf.divs.prima.size.y / 2)) + 'px', 'style', 'top')
-		player.set_divAttrib(player, 'prima', (player.conf.position.x - (player.conf.divs.prima.size.x / 2)) + 'px', 'style', 'left')
+
+		player.set_divAttrib('range', 'rotate(' + player.conf.theta.cur + 'deg)', 'style', 'transform')
+		player.set_divAttrib('ico', player.conf.theta.cur + '°', 'textContent', false)
+		player.set_divAttrib('prima', (player.conf.position.y - (player.conf.divs.prima.size.y / 2)) + 'px', 'style', 'top')
+		player.set_divAttrib('prima', (player.conf.position.x - (player.conf.divs.prima.size.x / 2)) + 'px', 'style', 'left')
+		player.set_divAttrib('prima', 'toto', 'data-nickname', false)
 	}
 	// -------------------------------------------------------------
 
