@@ -95,17 +95,13 @@ class Render {
 				if (parentdiv) parentdiv.appendChild(mob.get_div(key))
 
 				mob.set_divAttrib(key, 'vilains ' + mobConf.divs[key].className, 'className', false)
-
 			}
 		}
 		mob.set_divAttrib('info', '*' + mobConf.nickname, 'textContent', false)
-
 		mob.set_divAttrib('prima', mobConf.id, 'id', false)
 		mob.set_divAttrib('prima', mobConf.nickname, 'data-nickname', false)
 		mob.set_divAttrib('prima', mobConf.position.x + 'px', 'style', 'left')
 		mob.set_divAttrib('prima', mobConf.position.y + 'px', 'style', 'top')
-		// mob.set_divAttrib('range', mobConf.position.y + 'px', 'style', 'top')
-
 	}
 	#set_PlayerDivs(player) {
 
@@ -121,17 +117,15 @@ class Render {
 				// append in parent div if any
 				if (parentdiv) parentdiv.appendChild(player.divs[key])
 
-				player.set_divAttrib(player, key, 'gentils ' + player.conf.divs[key].className, 'className', false)
+				this.#set_divAttrib(player, key, 'gentils ' + player.conf.divs[key].className, 'className', false)
 
 			}
 		}
-		player.set_divAttrib(player, 'info', '*' + player.conf.nickname, 'textContent', false)
-
-		player.set_divAttrib(player, 'prima', player.conf.id, 'id', false)
-		player.set_divAttrib(player, 'prima', player.conf.nickname, 'data-nickname', false)
-		player.set_divAttrib(player, 'prima', player.conf.position.x + 'px', 'style', 'left')
-		player.set_divAttrib(player, 'prima', player.conf.position.y + 'px', 'style', 'top')
-
+		this.#set_divAttrib(player, 'info', '*' + player.conf.nickname, 'textContent', false)
+		this.#set_divAttrib(player, 'prima', player.conf.id, 'id', false)
+		this.#set_divAttrib(player, 'prima', player.conf.nickname, 'data-nickname', false)
+		this.#set_divAttrib(player, 'prima', player.conf.position.x + 'px', 'style', 'left')
+		this.#set_divAttrib(player, 'prima', player.conf.position.y + 'px', 'style', 'top')
 	}
 	#addCssToDom(stringcss, styleid) {
 		let style = document.createElement('style');
@@ -183,4 +177,14 @@ class Render {
 	}
 	// ------------------------------------------------
 
+	#set_divAttrib = (element, target, value = false, attribute = false, attribute2 = false) => {
+		if (element.divs[target] && value) {
+			if (attribute && attribute2) {
+				element.divs[target][attribute][attribute2] = value
+			}
+			else if (attribute && !attribute2) {
+				element.divs[target][attribute] = value
+			}
+		}
+	}
 }
