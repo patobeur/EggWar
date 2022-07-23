@@ -3,6 +3,7 @@ class MobsIa {
 		this.Formula = new Formula()
 	}
 	iaAction(conf) {
+		// console.log(conf)
 		if (conf.ia.changeAction.cur === 0) {
 
 			// save old action
@@ -37,10 +38,9 @@ class MobsIa {
 	#chooseDir(conf) {
 		let dir = this.Formula.rand(0, 1) > .5 ? 1 : -1;
 		conf.theta.cur += Math.floor(dir * conf.ia.dirAmplitude)
-
 	}
 	#keepMoving(conf) {
-		let nextpos = this.Formula.get_NextHtmlPos(
+		let nextpos = this.Formula.get_NextThreePos(
 			conf.position.x,
 			conf.position.y,
 			conf.theta.cur,

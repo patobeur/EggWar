@@ -1,4 +1,4 @@
-class Render {
+class AnimateDom {
 	#GameConfig
 	#Formula
 
@@ -24,17 +24,18 @@ class Render {
 		this.#AllPlayers = AllPlayers
 
 		this.#init_Dom()
-		this.#init_Render()
+		this.#init_Interval()
 	}
-	#init_Render = () => {
-		this.#interval = this.#GameConfig.get_('Render').interval
+	#init_Interval = () => {
+		this.#interval = this.#GameConfig.get_('render').interval
 	}
-	#render = () => {
+	#animate = () => {
 		if (this.#AllMobs.length > 0) this.#AllMobs.forEach(mob => mob.update());
 		if (this.#AllPlayers.length > 0) this.#AllPlayers.forEach(player => player.update());
 	}
+	// -------------------------------------------------------------
 	start_Render() {
-		this.#Render = setInterval(this.#render, this.#interval)
+		this.#Render = setInterval(this.#animate, this.#interval)
 	}
 	stop_Render() {
 		clearInterval(this.#Render);
@@ -44,19 +45,19 @@ class Render {
 		this.#Body = document.body
 		this.#init_GameDiv()
 
-		this.add_AllItemsToDom(this.#AllMobs)
-		this.add_AllItemsToDom(this.#AllPlayers)
+		this.#add_AllItemsToDom(this.#AllMobs)
+		this.#add_AllItemsToDom(this.#AllPlayers)
 
 		console.log('added mobs:', this.#AllMobs)
 		console.log('added players:', this.#AllPlayers)
 	}
-	#cssMaker = () => {
+	#css_Maker = () => {
 		// mobs css
 		let mobsCss = this.#get_ItemsCss(this.#MobConfig.config.mobs)
-		this.#addCssToDom(mobsCss, 'mobsCss')
+		this.#add_CssToDom(mobsCss, 'mobsCss')
 		// player css
 		let playerCss = this.#get_ItemsCss(this.#PlayerConfig.config.players)
-		this.#addCssToDom(playerCss, 'playersCss')
+		this.#add_CssToDom(playerCss, 'playersCss')
 	}
 
 	#init_GameDiv() {
@@ -65,7 +66,7 @@ class Render {
 		this.#GameDiv.className = this.#GameConfig.get_('dom').className
 		this.#add_ToTargetDomElem(this.#GameDiv, this.#Body)
 
-		this.#cssMaker()
+		this.#css_Maker()
 	}
 	#add_ToTargetDomElem(element, target = false) {
 		if (target && element) { target.appendChild(element); }
@@ -96,7 +97,7 @@ class Render {
 		this.#set_divAttrib(item, 'prima', item.conf.position.y + 'px', 'style', 'top')
 		this.#set_divAttrib(item, 'prima', item.conf.faction + ' prima', 'className', false)
 	}
-	#addCssToDom(stringcss, styleid) {
+	#add_CssToDom(stringcss, styleid) {
 		let style = document.createElement('style');
 		style.textContent = stringcss
 		style.id = styleid
@@ -106,7 +107,7 @@ class Render {
 		let stringcss = this.#cssmaker(conf)
 		return stringcss
 	}
-	add_AllItemsToDom(Items) {
+	#add_AllItemsToDom(Items) {
 		if (typeof Items === 'object') {
 			Items.forEach(item => {
 				this.#set_Divs(item)

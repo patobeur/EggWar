@@ -1,7 +1,7 @@
 
 class Game {
 	#GameConfig
-	#Render
+	#AnimateDom
 
 	#Mobs;
 	#allMobs
@@ -19,18 +19,18 @@ class Game {
 	}
 
 	#init_() {
-		let vilains = ['Guillaume', 'Pyl', 'Charlotte', 'Frédéric', 'Rémi', 'Eslam', 'Charles-L', 'Audrey', 'Cédric', 'Antho', 'Renaud', 'Feun']
-		vilains.forEach(element => this.#Mobs.addOne(element));
+		let rangers = ['Guillaume', 'Pyl', 'Charlotte', 'Frédéric', 'Rémi', 'Eslam', 'Charles-L', 'Audrey', 'Cédric', 'Antho', 'Renaud', 'Feun']
+		rangers.forEach(element => this.#Mobs.addOne(element));
 		this.#allMobs = this.#Mobs.get_allMobs()
 
 		let gentils = ['Alice', 'Bob']
 		gentils.forEach(element => this.#Players.addOne(element));
 		this.#allPlayers = this.#Players.get_allPlayers()
 
-		this.#Render = new Render(this.#allMobs, this.#allPlayers)
+		this.#AnimateDom = new AnimateDom(this.#allMobs, this.#allPlayers)
 		this.#start()
 	}
 	#start() {
-		this.#Render.start_Render()
+		this.#AnimateDom.start_Render()
 	}
 }

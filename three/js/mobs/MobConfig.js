@@ -99,7 +99,10 @@ class MobConfig {
 					},
 				},
 				mesh: {
-					size: { x: 1, y: 1, z: 1 }
+					size: { x: 1, y: 1, z: 1 },
+					color: 'yellow',
+					wireframe: false,
+
 				}
 			}
 		}

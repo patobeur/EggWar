@@ -14,7 +14,7 @@ class GameConfig {
 				gameDivId: 'Game',
 				className: 'radientbg'
 			},
-			Render: {
+			render: {
 				interval: 50
 			}
 		}

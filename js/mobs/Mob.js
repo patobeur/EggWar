@@ -19,7 +19,7 @@ class Mob {
 		};
 	}
 	// ------------------------------------------------------------------------------------
-	// this must go to render class ???
+	// this must go to AnimateDom class ???
 	#refresh_Div() {
 		this.#set_divAttrib('range', 'rotate(' + this.conf.theta.cur + 'deg)', 'style', 'transform')
 		this.#set_divAttrib('ico', this.conf.theta.cur + '°', 'textContent', false)
